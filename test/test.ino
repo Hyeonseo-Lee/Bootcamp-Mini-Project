@@ -5,7 +5,7 @@
 #include <ArduinoJson.h> // n
 
 const char* ssid = "HyeonseoLee";
-const char* password = "***";
+const char* password = "****";
 
 OLED_U8G2 oled; 
 WebServer server(80);  
