@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inha Smart Factory</title>
+</head>
+<body>
+    <h1>Inha Smart Factory!</h1>
+    <p id="ip_address">IP address: </p>
+    <p id="temperature">Temperature: </p>
+    <p id="incheon_temperature">City/Min/Max: </p>
+    <p id="datetime">Current Time: </p>
+    <button onclick="updateData()">Check Temperature!</button>
+
+
+    <script>
+        function updateData() {
+            fetch('/update_data', {
+		headers: {
+			Accept: "application / json",
+	},
+	method: "GET",
+	})
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('ip_address').textContent = "IP address: " + data.ip_address;
+                    document.getElementById('temperature').textContent = data.temperature_text;
+                    document.getElementById('incheon_temperature').textContent = data.incheon_temperature_text;
+                });
+        }
+
+    
+
+        function updateDateTime() {
+            setInterval(function() {
+                let currentTime = new Date().toLocaleString();
+                document.getElementById('datetime').textContent = "Current Time: " + currentTime;
+            }, 1000);
+        }
+
+        updateDateTime();
+    </script>
+</body>
+</html>
